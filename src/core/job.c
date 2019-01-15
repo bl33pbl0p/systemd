@@ -206,8 +206,9 @@ Job* job_install(Job *j) {
                             (job_type_allows_late_merge(j->type) && job_type_is_superset(uj->type, j->type))) {
                                 job_merge_into_installed(uj, j);
                                 log_unit_debug(uj->unit,
-                                               "Merged into installed job %s/%s as %u",
-                                               uj->unit->id, job_type_to_string(uj->type), (unsigned) uj->id);
+                                               "Merged %s/%s into installed job %s/%s as %u",
+                                               j->unit->id, job_type_to_string(j->type), uj->unit->id, 
+                                               job_type_to_string(uj->type), (unsigned) uj->id);
                                 return uj;
                         } else {
                                 /* already running and not safe to merge into */
